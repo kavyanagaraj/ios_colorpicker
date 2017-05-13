@@ -18,6 +18,7 @@ import UIKit
             }
         }
     }
+    @IBInspectable var maxArcLength: Double = 0.0
     @IBInspectable var outlineColor: UIColor = UIColor.blue
     @IBInspectable var timerColor: UIColor = UIColor.orange
     
@@ -56,7 +57,7 @@ import UIKit
         let angleDifference: CGFloat = 2 * 3.1415 - startAngle + endAngle
         
         //then calculate the arc for each single glass
-        let arcLengthPerSecond = angleDifference / CGFloat(60)
+        let arcLengthPerSecond = angleDifference / CGFloat(maxArcLength)
         
         //then multiply out by the actual glasses drunk
         let outlineEndAngle = arcLengthPerSecond * CGFloat(timer) + startAngle
@@ -85,9 +86,6 @@ import UIKit
             outlinePath.lineWidth = 0.0
         }
         outlinePath.stroke()
-        
-        
-        
     }
 
 }

@@ -511,6 +511,7 @@
 				59CBF8EE1EC66B3900E82B8B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		59CBF8EF1EC66B3900E82B8B /* Build configuration list for PBXNativeTarget "colorpickerTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +520,7 @@
 				59CBF8F11EC66B3900E82B8B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		59CBF8F21EC66B3900E82B8B /* Build configuration list for PBXNativeTarget "colorpickerUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +529,7 @@
 				59CBF8F41EC66B3900E82B8B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
