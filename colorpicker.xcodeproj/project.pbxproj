@@ -15,6 +15,10 @@
 		59CBF8DD1EC66B3900E82B8B /* colorpickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBF8DC1EC66B3900E82B8B /* colorpickerTests.swift */; };
 		59CBF8E81EC66B3900E82B8B /* colorpickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBF8E71EC66B3900E82B8B /* colorpickerUITests.swift */; };
 		59CBF8FA1EC66BCD00E82B8B /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBF8F91EC66BCD00E82B8B /* ColorView.swift */; };
+		841B37D61EC8D1C30063FE9D /* arr.txt in Resources */ = {isa = PBXBuildFile; fileRef = 841B37D51EC8D1C30063FE9D /* arr.txt */; };
+		841B37DF1EC8E0180063FE9D /* successSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 841B37DD1EC8E0180063FE9D /* successSound.mp3 */; };
+		841B37E31EC8EC790063FE9D /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 841B37E21EC8EC790063FE9D /* gameover.mp3 */; };
+		841B37E51EC8FD1A0063FE9D /* musicloop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 841B37E41EC8FD1A0063FE9D /* musicloop.wav */; };
 		90B07D381EC7D9E00040AEC9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90B07D361EC7D9E00040AEC9 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +54,10 @@
 		59CBF8E71EC66B3900E82B8B /* colorpickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorpickerUITests.swift; sourceTree = "<group>"; };
 		59CBF8E91EC66B3900E82B8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59CBF8F91EC66BCD00E82B8B /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		841B37D51EC8D1C30063FE9D /* arr.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = arr.txt; path = ../../../rental_app/arr.txt; sourceTree = "<group>"; };
+		841B37DD1EC8E0180063FE9D /* successSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = successSound.mp3; sourceTree = "<group>"; };
+		841B37E21EC8EC790063FE9D /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
+		841B37E41EC8FD1A0063FE9D /* musicloop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = musicloop.wav; sourceTree = "<group>"; };
 		90B07D371EC7D9E00040AEC9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,11 +109,13 @@
 		59CBF8C61EC66B3900E82B8B /* colorpicker */ = {
 			isa = PBXGroup;
 			children = (
+				841B37D71EC8D6C30063FE9D /* Sounds */,
 				59CBF8F91EC66BCD00E82B8B /* ColorView.swift */,
 				59CBF8C71EC66B3900E82B8B /* AppDelegate.swift */,
 				59CBF8C91EC66B3900E82B8B /* ViewController.swift */,
 				59CBF8CB1EC66B3900E82B8B /* Main.storyboard */,
 				59CBF8CE1EC66B3900E82B8B /* Assets.xcassets */,
+				841B37D51EC8D1C30063FE9D /* arr.txt */,
 				59CBF8D01EC66B3900E82B8B /* LaunchScreen.storyboard */,
 				59CBF8D31EC66B3900E82B8B /* Info.plist */,
 				90B07D361EC7D9E00040AEC9 /* Model.xcdatamodeld */,
@@ -129,6 +139,16 @@
 				59CBF8E91EC66B3900E82B8B /* Info.plist */,
 			);
 			path = colorpickerUITests;
+			sourceTree = "<group>";
+		};
+		841B37D71EC8D6C30063FE9D /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				841B37DD1EC8E0180063FE9D /* successSound.mp3 */,
+				841B37E41EC8FD1A0063FE9D /* musicloop.wav */,
+				841B37E21EC8EC790063FE9D /* gameover.mp3 */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,8 +259,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841B37E51EC8FD1A0063FE9D /* musicloop.wav in Resources */,
 				59CBF8D21EC66B3900E82B8B /* LaunchScreen.storyboard in Resources */,
 				59CBF8CF1EC66B3900E82B8B /* Assets.xcassets in Resources */,
+				841B37E31EC8EC790063FE9D /* gameover.mp3 in Resources */,
+				841B37D61EC8D1C30063FE9D /* arr.txt in Resources */,
+				841B37DF1EC8E0180063FE9D /* successSound.mp3 in Resources */,
 				59CBF8CD1EC66B3900E82B8B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,11 +447,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y7MP544XC9;
 				INFOPLIST_FILE = colorpicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylebible;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -436,11 +462,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y7MP544XC9;
 				INFOPLIST_FILE = colorpicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylebible;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

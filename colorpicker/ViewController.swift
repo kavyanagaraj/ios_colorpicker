@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import CoreMotion
+import AudioToolbox
+import AVFoundation
 
 class ViewController: UIViewController {
     //############
@@ -29,12 +31,20 @@ class ViewController: UIViewController {
     var randColor = (1,1,1)
     var contrast = (0,0,0)
     var roundInProgress: Bool = false
-    let colorArr = [(5, 0, 5), (5, 0, 4), (6, 0, 4), (6, 0, 3), (6, 1, 3), (6, 1, 2), (5, 1, 2), (6, 2, 2), (6, 2, 1), (6, 3, 1), (6, 3, 0), (7, 3, 1), (7, 2, 1), (7, 2, 2), (7, 1, 2), (7, 1, 3), (5, 0, 3), (4, 0, 3), (4, 1, 3), (4, 1, 2), (4, 2, 1), (4, 3, 1), (4, 3, 0), (4, 4, 0), (5, 4, 0), (5, 5, 0), (6, 5, 0), (6, 6, 0), (7, 6, 0), (7, 6, 1), (8, 6, 1), (8, 7, 1), (8, 7, 2), (8, 8, 2), (8, 8, 3), (8, 9, 3), (7, 9, 3), (7, 10, 4), (6, 10, 4), (6, 10, 5), (5, 10, 5), (5, 10, 6), (4, 10, 6), (3, 10, 6), (3, 9, 6), (3, 9, 7), (2, 9, 7), (2, 8, 6), (1, 8, 6), (1, 7, 6), (0, 7, 6), (0, 7, 5), (0, 6, 5), (0, 6, 4), (0, 6, 3), (0, 5, 3), (1, 5, 3), (1, 5, 2), (1, 4, 2), (2, 4, 1), (3, 4, 1), (3, 3, 1), (5, 2, 1), (5, 1, 3)]
+    var colorArr = [(Int,Int,Int)]()
+    var audioPlayer = AVAudioPlayer()
+    var successSound = AVAudioPlayer()
+    var failureSound = AVAudioPlayer()
+    var startScreen = true
+    var myMutableString = NSMutableAttributedString()
     
     
 
     // IB Outlets
+    @IBOutlet weak var gameTitle: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var gameLabel: UILabel!
+    @IBOutlet weak var overLabel: UILabel!
     @IBOutlet weak var roundLabel: UILabel!
     @IBOutlet weak var colorView: ColorView!
     @IBOutlet weak var timerLabel: UILabel!
@@ -54,6 +64,16 @@ class ViewController: UIViewController {
         scoreLabel.text = "Score: 0"
         roundLabel.text = "Round: 1"
         roundScoreLabel.isHidden = true
+        shakeLabel.isHidden = false
+        gameTitle.isHidden = true
+        gameLabel.isHidden = true
+        overLabel.isHidden = true
+        if !audioPlayer.isPlaying {
+            audioPlayer.play()
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.volume = 0.5
+        }
+        
     }
     
     func setTimer(time: Double) {
@@ -84,16 +104,28 @@ class ViewController: UIViewController {
             startButton.isHidden = false
             detectShake = false
             roundScoreLabel.isHidden = true
-            instructionsLabel.isHidden = false
-            let alert = UIAlertController(title: "You lose!", message: "You ran out of time.", preferredStyle: UIAlertControllerStyle.alert);
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil));
-            self.present(alert, animated: true, completion: nil);
+//            let alert = UIAlertController(title: "You lose!", message: "You ran out of time.", preferredStyle: UIAlertControllerStyle.alert);
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil));
+//            self.present(alert, animated: true, completion: nil);
+            startButton.setTitle("Start Over?", for: .normal)
+            gameLabel.isHidden = false
+            gameLabel.textColor = timerLabel.textColor
+            overLabel.isHidden = false
+            overLabel.textColor = timerLabel.textColor
+            startButton.backgroundColor = timerLabel.textColor
+            failureSound.play()
+            audioPlayer.stop()
+            startScreen = true
+            timerLabel.text = " "
         }
     }
+
     
     override func viewDidLoad() {
+        colorArr = [(5, 0, 5), (5, 0, 4), (6, 0, 4), (6, 0, 3), (6, 1, 3), (6, 1, 2), (5, 1, 2), (6, 2, 2), (6, 2, 1), (6, 3, 1), (6, 3, 0), (7, 3, 1), (7, 2, 1), (7, 2, 2), (7, 1, 2), (7, 1, 3), (5, 0, 3), (4, 0, 3), (4, 1, 3), (4, 1, 2), (4, 2, 1), (4, 3, 1), (4, 3, 0), (4, 4, 0), (5, 4, 0), (5, 5, 0), (6, 5, 0), (6, 6, 0), (7, 6, 0), (7, 6, 1), (8, 6, 1), (8, 7, 1), (8, 7, 2), (8, 8, 2), (8, 8, 3), (8, 9, 3), (7, 9, 3), (7, 10, 4), (6, 10, 4), (6, 10, 5), (5, 10, 5), (5, 10, 6), (4, 10, 6), (3, 10, 6), (3, 9, 6), (3, 9, 7), (2, 9, 7), (2, 8, 6), (1, 8, 6), (1, 7, 6), (0, 7, 6), (0, 7, 5), (0, 6, 5), (0, 6, 4), (0, 6, 3), (0, 5, 3), (1, 5, 3), (1, 5, 2), (1, 4, 2), (2, 4, 1), (3, 4, 1), (3, 3, 1), (5, 2, 1), (5, 1, 3), (3, 1, 2), (3, 2, 2), (2, 3, 1), (2, 5, 1), (2, 6, 1), (3, 6, 1), (3, 7, 1), (4, 8, 1), (4, 9, 2), (5, 9, 2), (5, 9, 3), (6, 10, 3), (5, 10, 7), (4, 10, 7), (4, 9, 7), (2, 8, 7), (1, 8, 7), (1, 7, 7), (0, 6, 6), (0, 5, 5), (0, 5, 4), (1, 4, 3), (2, 4, 2), (3, 1, 3), (3, 2, 1), (3, 4, 0), (4, 5, 0), (5, 6, 0), (6, 7, 0), (6, 7, 1), (7, 7, 1), (9, 8, 3), (9, 8, 4), (9, 8, 5), (9, 8, 6), (9, 8, 7), (8, 8, 7), (8, 8, 8), (7, 8, 9), (6, 8, 9), (5, 8, 9), (5, 7, 9), (4, 7, 9), (3, 7, 9), (3, 6, 9), (2, 6, 9), (2, 5, 9), (1, 4, 8), (1, 3, 8), (1, 3, 7), (1, 3, 6), (1, 3, 5), (1, 3, 4), (1, 2, 3), (2, 2, 3), (2, 1, 3), (4, 0, 4), (4, 0, 5), (3, 0, 5), (3, 0, 4), (3, 1, 4), (7, 0, 4), (7, 1, 4), (5, 3, 1), (2, 3, 2), (1, 3, 2), (2, 2, 2), (5, 0, 6), (4, 0, 6), (4, 0, 7), (4, 1, 7), (3, 1, 7), (2, 1, 7), (2, 1, 6), (1, 2, 5), (1, 2, 4), (6, 4, 0), (7, 5, 0), (7, 5, 1), (8, 6, 2), (9, 7, 2), (9, 7, 3), (9, 7, 4), (10, 7, 4), (10, 7, 3), (5, 7, 0), (4, 6, 0), (3, 6, 0), (3, 5, 0), (3, 5, 1), (4, 9, 3), (4, 10, 3), (4, 10, 4), (4, 10, 5), (4, 9, 8), (4, 8, 8), (4, 8, 9), (3, 8, 9), (3, 8, 8), (3, 9, 8), (3, 9, 5), (3, 9, 4), (3, 9, 3), (3, 9, 2), (4, 8, 2), (4, 7, 1), (4, 7, 0), (5, 3, 0), (5, 1, 1), (6, 0, 5), (6, 0, 6), (5, 7, 1), (5, 10, 3), (5, 10, 4), (3, 10, 5), (3, 10, 4), (3, 10, 3), (5, 8, 1), (5, 9, 1), (0, 4, 3), (0, 4, 4), (0, 4, 5), (0, 4, 6), (0, 4, 7), (1, 4, 7), (1, 5, 7), (0, 5, 7), (0, 5, 6), (1, 5, 1), (7, 4, 0), (7, 4, 1), (8, 4, 1), (8, 5, 1), (9, 5, 2), (9, 5, 3), (10, 5, 3), (10, 5, 4), (10, 5, 5), (10, 5, 6), (9, 6, 2), (9, 5, 1), (1, 5, 8), (1, 6, 8), (8, 3, 1), (8, 3, 2), (9, 3, 2), (9, 4, 2), (9, 4, 3), (10, 4, 3), (10, 4, 4), (10, 4, 5), (10, 4, 6), (10, 5, 7), (10, 6, 7), (6, 8, 1), (7, 8, 1), (7, 8, 2), (8, 9, 4), (8, 9, 5), (8, 9, 6), (8, 9, 7), (7, 9, 7), (6, 9, 7), (6, 9, 8), (5, 9, 8), (0, 3, 5), (0, 3, 4), (4, 2, 2), (2, 9, 6), (1, 3, 3), (3, 0, 6), (3, 1, 6), (2, 1, 5), (1, 1, 5), (6, 8, 2), (6, 9, 2), (1, 8, 5), (1, 7, 5), (7, 0, 5), (8, 1, 3), (8, 2, 3), (8, 2, 2), (8, 1, 4), (7, 1, 5), (7, 9, 2), (6, 9, 3), (5, 9, 7), (7, 7, 9), (8, 7, 9), (8, 6, 9), (9, 5, 9), (9, 5, 8), (9, 4, 8), (9, 3, 8), (9, 3, 7), (9, 2, 7), (8, 2, 6), (8, 1, 6), (8, 1, 5), (7, 9, 4), (7, 10, 5), (7, 9, 6), (9, 7, 7), (9, 6, 7), (9, 5, 7), (10, 4, 7), (9, 4, 7), (9, 3, 6), (9, 2, 6), (9, 7, 6), (10, 7, 6), (10, 6, 6), (10, 6, 5), (10, 6, 4), (2, 2, 4), (2, 1, 4), (8, 2, 4), (9, 2, 4), (9, 2, 3), (9, 3, 3), (9, 3, 4), (10, 3, 4), (10, 3, 5), (7, 7, 0), (2, 8, 8), (2, 7, 8), (1, 7, 8), (1, 6, 7), (1, 2, 6), (7, 0, 6), (7, 1, 6), (3, 8, 1), (3, 8, 2), (2, 8, 2), (8, 8, 4), (9, 9, 5), (9, 9, 6), (8, 8, 6), (3, 1, 5), (4, 1, 8), (5, 1, 8), (6, 1, 8), (7, 1, 8), (7, 1, 7), (8, 1, 7), (8, 2, 7), (9, 2, 5), (2, 9, 3), (2, 9, 4), (2, 9, 5), (1, 9, 5), (1, 8, 4), (1, 8, 3), (2, 8, 3), (2, 7, 2), (2, 7, 1), (6, 7, 9), (7, 6, 9), (8, 5, 9), (8, 4, 9), (7, 8, 8), (8, 6, 8), (9, 6, 8), (9, 3, 5), (7, 10, 6), (6, 10, 7), (0, 6, 7), (2, 7, 9), (5, 7, 10), (5, 6, 10), (5, 5, 10), (5, 4, 10), (4, 4, 10), (3, 4, 10), (3, 5, 10), (3, 5, 9), (3, 6, 10), (3, 4, 9), (2, 4, 9), (2, 3, 9), (3, 3, 9), (3, 2, 9), (3, 2, 8), (3, 1, 8), (6, 10, 6), (5, 3, 10), (5, 3, 9), (4, 2, 9), (5, 1, 7), (5, 0, 7), (4, 7, 10), (4, 3, 10), (4, 3, 9), (5, 2, 9), (6, 2, 9), (6, 1, 7), (6, 0, 7), (5, 9, 9), (6, 7, 10), (6, 6, 10), (7, 6, 10), (7, 5, 10), (7, 4, 10), (7, 4, 9), (7, 3, 9), (7, 2, 9), (6, 2, 8), (7, 5, 9), (8, 3, 9), (8, 2, 8), (7, 2, 8), (2, 6, 2), (1, 7, 2), (4, 6, 10), (6, 3, 10), (6, 3, 9), (3, 7, 0), (4, 5, 10), (2, 3, 8), (2, 2, 8), (2, 4, 8), (1, 6, 2), (7, 9, 8), (2, 2, 7), (1, 2, 7), (8, 7, 8), (6, 5, 10), (8, 4, 8), (10, 3, 6), (7, 9, 5), (1, 6, 3), (4, 2, 8), (7, 3, 0), (8, 3, 8), (1, 5, 9), (2, 6, 8), (0, 3, 6), (8, 4, 2), (2, 2, 6), (10, 7, 5), (9, 7, 5), (1, 7, 3), (10, 6, 3), (9, 6, 3), (9, 7, 8), (6, 4, 10), (7, 0, 3), (1, 4, 1), (6, 1, 1), (0, 7, 4), (1, 7, 4), (5, 1, 9), (2, 8, 4), (9, 1, 5), (1, 9, 4), (3, 3, 0), (6, 8, 8)]
+
         super.viewDidLoad()
-        timerLabel.text = "😎"
+        timerLabel.text = " "
         startButton.isHidden = false
         detectShake = false
         instructionsLabel.isHidden = false
@@ -101,6 +133,37 @@ class ViewController: UIViewController {
         roundLabel.text = "Round: 1"
         roundScoreLabel.isHidden = true
         shakeLabel.isHidden = true
+        startButton.layer.cornerRadius = 5
+        randColor = colorArr[Int(arc4random_uniform(UInt32(colorArr.count)))]
+        contrast = contrastTupe(tupe: randColor)
+        startButton.backgroundColor = changeColor(tupe: contrast)
+        view.backgroundColor = changeColor(tupe: randColor)
+        colorView.backgroundColor = changeColor(tupe: randColor)
+        colorView.timerColor = changeColor(tupe: contrast)
+//        gameTitle.textColor = changeColor(tupe: contrast)
+        scoreLabel.isHidden = true
+        roundLabel.isHidden = true
+        gameLabel.isHidden = true
+        overLabel.isHidden = true
+        gameTitle.attributedText = differentColorLetters(str: gameTitle.text, colorTupe: randColor)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource:"musicloop", ofType:"wav")!))
+        }
+        catch {
+            print(error)
+        }
+        do {
+            successSound = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource:"successSound", ofType:"mp3")!))
+        }
+        catch {
+            print(error)
+        }
+        do {
+            failureSound = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource:"gameover", ofType:"mp3")!))
+        }
+        catch {
+            print(error)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -162,35 +225,60 @@ class ViewController: UIViewController {
                                 self.detectShake = true
                                 self.shakeLabel.isHidden = false
                                 self.matched = true
+                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                                if self.successSound.isPlaying {
+                                    self.successSound.stop()
+                                    self.successSound.play()
+                                }
+                                else {
+                                    self.successSound.play()
+                                }
+                                
+                                self.roundScoreLabel.isHidden = true
                             }
                         }
                         
                         if self.detectShake && ((mydata.userAcceleration.x > 2 || mydata.userAcceleration.x < -2) || (mydata.userAcceleration.y > 2 || mydata.userAcceleration.y < -2) || (mydata.userAcceleration.z > 2 || mydata.userAcceleration.z < -2)) {
-                            let roundTime = 60/Double(self.gameRound)
+                            var roundTime = Double()
+                            if self.gameRound <= 12 {
+                                roundTime = 60/Double(self.gameRound)
+                            }
+                            else if self.gameRound > 12 {
+                                roundTime = Double(5)
+                            }
                             self.setTimer(time: roundTime)
                             self.randColor = self.colorArr[Int(arc4random_uniform(UInt32(self.colorArr.count)))]
-                            self.colorView.timerColor = UIColor(red: CGFloat(Double((self.randColor.0))/10), green: CGFloat(Double((self.randColor.1))/10), blue: CGFloat(Double((self.randColor.2))/10), alpha: 1)
+                            self.contrast = self.contrastTupe(tupe: self.randColor)
+                            self.colorView.outlineColor = self.changeColor(tupe: self.contrast)
+                            self.colorView.timerColor = self.changeColor(tupe: self.randColor)
                             self.matched = false
                             self.roundInProgress = true
-                            self.contrast = self.contrastTupe(tupe: self.randColor)
-                            self.colorView.outlineColor = UIColor(red: CGFloat(Double((self.contrast.0))/10), green: CGFloat(Double((self.contrast.1))/10), blue: CGFloat(Double((self.contrast.2))/10), alpha: 1)
                             self.roundScore = 1000
                             self.roundScoreLabel.text = "\(self.roundScore)"
                             self.roundScoreLabel.isHidden = false
                             self.detectShake = false
+                            self.shakeLabel.isHidden = true
+                            self.startScreen = false
+                            self.roundScoreLabel.isHidden = false
+                            self.scoreLabel.isHidden = false
+                            self.roundLabel.isHidden = false
                         }
                         
                         if self.matched == true {
-                            self.contrast = self.contrastTupe(tupe: (self.randColor))
-                           self.view.backgroundColor = UIColor(red: CGFloat(Double((self.randColor.0))/10), green: CGFloat(Double((self.randColor.1))/10), blue: CGFloat(Double((self.randColor.2))/10), alpha: 1)
-                            self.colorView.backgroundColor = UIColor(red: CGFloat(Double((self.randColor.0))/10), green: CGFloat(Double((self.randColor.1))/10), blue: CGFloat(Double((self.randColor.2))/10), alpha: 1)
-                            self.timerLabel.textColor = UIColor(red: CGFloat(Double((self.contrast.0))/10), green: CGFloat(Double((self.contrast.1))/10), blue: CGFloat(Double((self.contrast.2))/10), alpha: 1)
+                            self.contrast = self.contrastTupe(tupe: self.randColor)
+                            self.view.backgroundColor = self.changeColor(tupe: self.randColor)
+                            self.colorView.backgroundColor = self.changeColor(tupe: self.randColor)
+                            self.timerLabel.textColor = self.changeColor(tupe:self.contrast)
+                        }
+                        else if self.startScreen {
+                            
                         }
                         else {
                             self.contrast = self.contrastTupe(tupe: (Int(xcolors),Int(zcolors),Int(ycolors)))
-                        self.view.backgroundColor = UIColor(red: CGFloat(xcolors/10), green: CGFloat(zcolors/10), blue: CGFloat(ycolors/10), alpha: 1)
-                        self.colorView.backgroundColor = UIColor(red: CGFloat(xcolors/10), green: CGFloat(zcolors/10), blue: CGFloat(ycolors/10), alpha: 1)
-                        self.timerLabel.textColor = UIColor(red: CGFloat(Double((self.contrast.0))/10), green: CGFloat(Double((self.contrast.1))/10), blue: CGFloat(Double((self.contrast.2))/10), alpha: 1)
+                            self.view.backgroundColor = self.changeColor(tupe: (Int(xcolors), Int(zcolors), Int(ycolors)))
+                            self.colorView.backgroundColor = self.changeColor(tupe: (Int(xcolors), Int(zcolors), Int(ycolors)))
+                            self.timerLabel.textColor = self.changeColor(tupe: self.contrast)
+                            self.startButton.backgroundColor = self.changeColor(tupe: self.contrast)
                         }
                         
                         
@@ -228,6 +316,36 @@ class ViewController: UIViewController {
         total = max + min
         return (total-tupe.0,total-tupe.1,total-tupe.2)
         
+    }
+    
+    func changeColor(tupe: (Int,Int,Int)) -> UIColor {
+        let myItem = UIColor(red: CGFloat(Double(tupe.0)/10), green: CGFloat(Double(tupe.1)/10), blue: CGFloat(Double(tupe.2)/10), alpha: 1)
+//        print(tupe)
+        return myItem
+    }
+    
+    func differentColorLetters(str: String?, colorTupe: (Int,Int,Int)) -> NSMutableAttributedString {
+        if let myStr = str {
+            myMutableString = NSMutableAttributedString(string: myStr)
+            for i in 0..<myStr.characters.count {
+                let randColor = pickUniqueColor(tupe: colorTupe)
+                let myColor = changeColor(tupe: randColor)
+                myMutableString.addAttribute(NSForegroundColorAttributeName, value: myColor, range: NSRange(location:i,length:1))
+            }
+            return myMutableString
+        }
+        else {
+            print("empty string")
+        }
+        return NSMutableAttributedString(string: "error")
+    }
+    
+    func pickUniqueColor(tupe: (Int,Int,Int)) -> (Int,Int,Int) {
+        var pickedColor = colorArr[Int(arc4random_uniform(UInt32(colorArr.count)))]
+        while pickedColor == tupe {
+            pickedColor = colorArr[Int(arc4random_uniform(UInt32(colorArr.count)))]
+        }
+        return pickedColor
     }
 }
 
