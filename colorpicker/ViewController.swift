@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     // Game Variables
@@ -16,7 +17,7 @@ class ViewController: UIViewController {
     var timer = Timer()
 //    var colorToMatch: Int
 //    var userColor: Int
-    
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // IB Outlets
     @IBOutlet weak var scoreLabel: UILabel!
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var readyButton: UIButton!
     @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet var GameView: UIView!
     
     // IB Actions
     @IBAction func startButtonPressed(_ sender: UIButton) {
@@ -37,7 +39,7 @@ class ViewController: UIViewController {
     
     @IBAction func readyButtonPressed(_ sender: UIButton) {
         readyButton.isHidden = true
-        let roundTime = 60/Double(round)
+        let roundTime = 10/Double(round)
         setTimer(time: roundTime)
     }
     
@@ -97,12 +99,27 @@ class ViewController: UIViewController {
         instructionsLabel.isHidden = false
         scoreLabel.text = "Score: 0"
         roundLabel.text = "Round: 1"
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let moc = managedObjectContext
+        let colorsFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Color")
+        
+        do {
+            var _: [Color]
+            let fetchedColors = try moc.fetch(colorsFetch) as! [Color]
+            print(fetchedColors.count)
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+        
+    }
+    
 }
 

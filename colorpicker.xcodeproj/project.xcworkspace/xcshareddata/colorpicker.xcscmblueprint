@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8BBBF48E949EACCB58E792853687DBA2BAE6071D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A84C0CA27D44E1596FC5498C81D9C5B83A1C4E03" : 9223372036854775807,
+    "8BBBF48E949EACCB58E792853687DBA2BAE6071D" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F4FE6E21-12C0-45B2-A410-A6B5BC3224E5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A84C0CA27D44E1596FC5498C81D9C5B83A1C4E03" : "..\/..",
+    "8BBBF48E949EACCB58E792853687DBA2BAE6071D" : "ios_colorpicker\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "colorpicker",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "colorpicker.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kavyanagaraj\/ios_colorpicker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8BBBF48E949EACCB58E792853687DBA2BAE6071D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kavyanagaraj\/DojoAssignments.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A84C0CA27D44E1596FC5498C81D9C5B83A1C4E03"
+    }
+  ]
+}

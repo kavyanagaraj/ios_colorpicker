@@ -106,6 +106,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="GameView" destination="8bC-Xf-vdC" id="GlG-vO-zIx"/>
                         <outlet property="colorView" destination="EtX-HJ-Bkx" id="mjb-V5-D1J"/>
                         <outlet property="instructionsLabel" destination="NlL-xe-dar" id="SGk-xk-MgI"/>
                         <outlet property="readyButton" destination="HIB-9V-zdb" id="JFN-uS-tV6"/>
