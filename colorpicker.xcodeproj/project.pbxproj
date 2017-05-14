@@ -15,6 +15,7 @@
 		59CBF8DD1EC66B3900E82B8B /* colorpickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBF8DC1EC66B3900E82B8B /* colorpickerTests.swift */; };
 		59CBF8E81EC66B3900E82B8B /* colorpickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBF8E71EC66B3900E82B8B /* colorpickerUITests.swift */; };
 		59CBF8FA1EC66BCD00E82B8B /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBF8F91EC66BCD00E82B8B /* ColorView.swift */; };
+		90B07D381EC7D9E00040AEC9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90B07D361EC7D9E00040AEC9 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		59CBF8E71EC66B3900E82B8B /* colorpickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorpickerUITests.swift; sourceTree = "<group>"; };
 		59CBF8E91EC66B3900E82B8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59CBF8F91EC66BCD00E82B8B /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		90B07D371EC7D9E00040AEC9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				59CBF8CE1EC66B3900E82B8B /* Assets.xcassets */,
 				59CBF8D01EC66B3900E82B8B /* LaunchScreen.storyboard */,
 				59CBF8D31EC66B3900E82B8B /* Info.plist */,
+				90B07D361EC7D9E00040AEC9 /* Model.xcdatamodeld */,
 			);
 			path = colorpicker;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				59CBF8FA1EC66BCD00E82B8B /* ColorView.swift in Sources */,
 				59CBF8CA1EC66B3900E82B8B /* ViewController.swift in Sources */,
 				59CBF8C81EC66B3900E82B8B /* AppDelegate.swift in Sources */,
+				90B07D381EC7D9E00040AEC9 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +539,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		90B07D361EC7D9E00040AEC9 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				90B07D371EC7D9E00040AEC9 /* Model.xcdatamodel */,
+			);
+			currentVersion = 90B07D371EC7D9E00040AEC9 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 59CBF8BC1EC66B3900E82B8B /* Project object */;
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import CoreMotion
 
 class ViewController: UIViewController {
@@ -23,6 +24,7 @@ class ViewController: UIViewController {
     var roundScore: Int = 0
     var gameRound: Int = 0
     var timer = Timer()
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var matched = false
     var randColor = (1,1,1)
     var contrast = (0,0,0)
@@ -30,8 +32,6 @@ class ViewController: UIViewController {
     let colorArr = [(5, 0, 5), (5, 0, 4), (6, 0, 4), (6, 0, 3), (6, 1, 3), (6, 1, 2), (5, 1, 2), (6, 2, 2), (6, 2, 1), (6, 3, 1), (6, 3, 0), (7, 3, 1), (7, 2, 1), (7, 2, 2), (7, 1, 2), (7, 1, 3), (5, 0, 3), (4, 0, 3), (4, 1, 3), (4, 1, 2), (4, 2, 1), (4, 3, 1), (4, 3, 0), (4, 4, 0), (5, 4, 0), (5, 5, 0), (6, 5, 0), (6, 6, 0), (7, 6, 0), (7, 6, 1), (8, 6, 1), (8, 7, 1), (8, 7, 2), (8, 8, 2), (8, 8, 3), (8, 9, 3), (7, 9, 3), (7, 10, 4), (6, 10, 4), (6, 10, 5), (5, 10, 5), (5, 10, 6), (4, 10, 6), (3, 10, 6), (3, 9, 6), (3, 9, 7), (2, 9, 7), (2, 8, 6), (1, 8, 6), (1, 7, 6), (0, 7, 6), (0, 7, 5), (0, 6, 5), (0, 6, 4), (0, 6, 3), (0, 5, 3), (1, 5, 3), (1, 5, 2), (1, 4, 2), (2, 4, 1), (3, 4, 1), (3, 3, 1), (5, 2, 1), (5, 1, 3)]
     
     
-//    var colorToMatch: Int
-//    var userColor: Int
 
     // IB Outlets
     @IBOutlet weak var scoreLabel: UILabel!
@@ -111,6 +111,17 @@ class ViewController: UIViewController {
     //###################
     
     override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    let moc = managedObjectContext
+    let colorsFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Color")
+    
+    do {
+    var _: [Color]
+    let fetchedColors = try moc.fetch(colorsFetch) as! [Color]
+    print(fetchedColors.count)
+    } catch {
+    fatalError("Failed to fetch employees: \(error)")
+    }
 //        print(Double((randColor.0))/10)
         motionManager = CMMotionManager()
         if let manager = motionManager {
