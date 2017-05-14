@@ -25,31 +25,34 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EtX-HJ-Bkx" customClass="ColorView" customModule="colorpicker" customModuleProvider="target">
                                 <rect key="frame" x="72" y="218" width="230" height="230"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIB-9V-zdb">
-                                        <rect key="frame" x="94" y="166" width="43" height="30"/>
-                                        <state key="normal" title="Ready"/>
-                                        <connections>
-                                            <action selector="readyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LzP-4o-FJv"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLY-M8-OM8">
                                         <rect key="frame" x="76" y="166" width="78" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="78" id="RdO-ci-07a"/>
                                             <constraint firstAttribute="height" constant="30" id="g2q-i8-rpl"/>
                                         </constraints>
-                                        <state key="normal" title="Start Game"/>
+                                        <state key="normal" title="Start Game">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
                                         <connections>
                                             <action selector="startButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kcm-C4-D7T"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake to start a new round!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeC-5j-BHb">
+                                        <rect key="frame" x="10" y="216" width="210" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="aeC-5j-BHb" firstAttribute="centerX" secondItem="EtX-HJ-Bkx" secondAttribute="centerX" id="GCb-rV-dKv"/>
                                     <constraint firstItem="VLY-M8-OM8" firstAttribute="centerX" secondItem="EtX-HJ-Bkx" secondAttribute="centerX" id="RNe-gl-Zpr"/>
                                     <constraint firstAttribute="width" constant="230" id="Wcz-Pd-Quk"/>
                                     <constraint firstAttribute="height" constant="230" id="XW0-xL-C9L"/>
-                                    <constraint firstItem="HIB-9V-zdb" firstAttribute="centerX" secondItem="EtX-HJ-Bkx" secondAttribute="centerX" id="gtX-QN-rah"/>
+                                    <constraint firstItem="aeC-5j-BHb" firstAttribute="top" secondItem="VLY-M8-OM8" secondAttribute="bottom" constant="20" id="exu-qo-efn"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jND-l9-0oI">
@@ -65,8 +68,9 @@
                                     <constraint firstAttribute="height" constant="21" id="gzH-dM-tiJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round: 99" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yg7-9c-edg">
                                 <rect key="frame" x="225" y="28" width="134" height="21"/>
@@ -75,8 +79,9 @@
                                     <constraint firstAttribute="width" constant="134" id="Zty-Pm-b2g"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tilt your phone to match the color in the center within the time limit." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlL-xe-dar">
                                 <rect key="frame" x="72" y="435" width="230" height="64"/>
@@ -85,19 +90,28 @@
                                     <constraint firstAttribute="height" constant="64" id="ppw-3I-IW7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNm-5f-iYY">
+                                <rect key="frame" x="168" y="435" width="39" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="cWd-Dx-QbN" secondAttribute="leading" id="6xg-7b-DKV"/>
+                            <constraint firstItem="UNm-5f-iYY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GXJ-uj-WdI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Yg7-9c-edg" secondAttribute="trailing" id="Hyw-Jm-jbD"/>
                             <constraint firstItem="EtX-HJ-Bkx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IY7-4y-pLX"/>
                             <constraint firstItem="jND-l9-0oI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q80-Xb-uhC"/>
                             <constraint firstItem="VLY-M8-OM8" firstAttribute="top" secondItem="jND-l9-0oI" secondAttribute="bottom" constant="29.5" id="Uc8-FL-uKM"/>
-                            <constraint firstItem="HIB-9V-zdb" firstAttribute="top" secondItem="jND-l9-0oI" secondAttribute="bottom" constant="29.5" id="YWt-Fa-x1d"/>
                             <constraint firstItem="Yg7-9c-edg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Zdb-a4-Ete"/>
+                            <constraint firstItem="UNm-5f-iYY" firstAttribute="top" secondItem="VLY-M8-OM8" secondAttribute="bottom" constant="21" id="aac-7B-Hbs"/>
                             <constraint firstItem="jND-l9-0oI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ghO-eZ-rc9"/>
                             <constraint firstItem="cWd-Dx-QbN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="ie4-Ot-WqA"/>
                             <constraint firstItem="NlL-xe-dar" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mtG-w5-pIR"/>
@@ -108,9 +122,10 @@
                     <connections>
                         <outlet property="colorView" destination="EtX-HJ-Bkx" id="mjb-V5-D1J"/>
                         <outlet property="instructionsLabel" destination="NlL-xe-dar" id="SGk-xk-MgI"/>
-                        <outlet property="readyButton" destination="HIB-9V-zdb" id="JFN-uS-tV6"/>
                         <outlet property="roundLabel" destination="Yg7-9c-edg" id="sZX-vb-4dx"/>
+                        <outlet property="roundScoreLabel" destination="UNm-5f-iYY" id="ZhI-2k-g6T"/>
                         <outlet property="scoreLabel" destination="cWd-Dx-QbN" id="XNk-9r-jBh"/>
+                        <outlet property="shakeLabel" destination="aeC-5j-BHb" id="IGQ-F1-LWc"/>
                         <outlet property="startButton" destination="VLY-M8-OM8" id="XRc-hv-uvy"/>
                         <outlet property="timerLabel" destination="jND-l9-0oI" id="9cT-5F-OVX"/>
                     </connections>
