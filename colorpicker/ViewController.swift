@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     var gameRound: Int = 0
     var timer = Timer()
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var colorArray = [Color]()
     var matched = false
     var randColor = (1,1,1)
     var contrast = (0,0,0)
@@ -145,6 +146,44 @@ class ViewController: UIViewController {
         roundLabel.isHidden = true
         gameLabel.isHidden = true
         overLabel.isHidden = true
+        
+        
+        
+        let color = Color(context: managedObjectContext)
+                    color.xColor = Int64(2)
+                    color.zColor = Int64(7)
+                    color.yColor = Int64(9)
+                    if managedObjectContext.hasChanges {
+                        do {
+                            try managedObjectContext.save()
+                            print("Success!")
+                        } catch {
+                            let nserror = error as NSError
+                            print("Unresolved error \(nserror), \(nserror.userInfo)")
+                            abort()
+                        }
+                    }
+
+        
+        //Code to add items to the database
+//        let cArray = [(2, 7, 9), (5, 7, 10), (5, 6, 10), (5, 5, 10), (5, 4, 10), (4, 4, 10), (3, 4, 10), (3, 5, 10), (3, 5, 9), (3, 6, 10), (3, 4, 9), (2, 4, 9), (2, 3, 9), (3, 3, 9), (3, 2, 9), (3, 2, 8), (3, 1, 8), (6, 10, 6), (5, 3, 10), (5, 3, 9), (4, 2, 9), (5, 1, 7), (5, 0, 7), (4, 7, 10), (4, 3, 10), (4, 3, 9), (5, 2, 9), (6, 2, 9), (6, 1, 7), (6, 0, 7), (5, 9, 9), (6, 7, 10), (6, 6, 10), (7, 6, 10), (7, 5, 10), (7, 4, 10), (7, 4, 9), (7, 3, 9), (7, 2, 9), (6, 2, 8), (7, 5, 9), (8, 3, 9), (8, 2, 8), (7, 2, 8), (2, 6, 2), (1, 7, 2), (4, 6, 10), (6, 3, 10), (6, 3, 9), (3, 7, 0), (4, 5, 10), (2, 3, 8), (2, 2, 8), (2, 4, 8), (1, 6, 2), (7, 9, 8), (2, 2, 7), (1, 2, 7), (8, 7, 8), (6, 5, 10), (8, 4, 8), (10, 3, 6), (7, 9, 5), (1, 6, 3), (4, 2, 8), (7, 3, 0), (8, 3, 8), (1, 5, 9), (2, 6, 8), (0, 3, 6), (8, 4, 2), (2, 2, 6), (10, 7, 5), (9, 7, 5), (1, 7, 3), (10, 6, 3), (9, 6, 3), (9, 7, 8), (6, 4, 10), (7, 0, 3), (1, 4, 1), (6, 1, 1), (0, 7, 4), (1, 7, 4), (5, 1, 9), (2, 8, 4), (9, 1, 5), (1, 9, 4), (3, 3, 0), (6, 8, 8)]
+//        for col in cArray{
+//            let color = Color(context: managedObjectContext)
+//            color.xColor = Int64(col.0)
+//            color.zColor = Int64(col.1)
+//            color.yColor = Int64(col.2)
+//            if managedObjectContext.hasChanges {
+//                do {
+//                    try managedObjectContext.save()
+//                    print("Success!")
+//                } catch {
+//                    let nserror = error as NSError
+//                    print("Unresolved error \(nserror), \(nserror.userInfo)")
+//                    abort()
+//                }
+//            }
+//        }
+        
         gameTitle.attributedText = differentColorLetters(str: gameTitle.text, colorTupe: randColor)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource:"musicloop", ofType:"wav")!))
@@ -175,20 +214,13 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let moc = managedObjectContext
-    let colorsFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Color")
-    
-    do {
-    var _: [Color]
-    let fetchedColors = try moc.fetch(colorsFetch) as! [Color]
-    print(fetchedColors.count)
-    } catch {
-    fatalError("Failed to fetch employees: \(error)")
-    }
 //        print(Double((randColor.0))/10)
+        fetchColors()
+        print(colorArray.count)
+
         motionManager = CMMotionManager()
         if let manager = motionManager {
-            
+
             if manager.isDeviceMotionAvailable {
                 manager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: {
                     (data: CMDeviceMotion?, error: Error?) in
@@ -346,6 +378,17 @@ class ViewController: UIViewController {
             pickedColor = colorArr[Int(arc4random_uniform(UInt32(colorArr.count)))]
         }
         return pickedColor
+    }
+    
+    func fetchColors(){
+        let fetchColors = NSFetchRequest<NSFetchRequestResult>(entityName: "Color")
+        do{
+           let fetchedColors = try managedObjectContext.fetch(fetchColors)
+           colorArray = fetchedColors as! [Color]
+        }
+        catch{
+            fatalError("Failed to fetch colors: \(error)")
+        }
     }
 }
 

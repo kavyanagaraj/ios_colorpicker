@@ -4,11 +4,13 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A84C0CA27D44E1596FC5498C81D9C5B83A1C4E03" : 9223372036854775807,
     "8BBBF48E949EACCB58E792853687DBA2BAE6071D" : 9223372036854775807,
     "5F324E888A8A88807622DFD84DC1172544B7A56C" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E062E865-3761-405A-8AE0-1AAE6A15A431",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A84C0CA27D44E1596FC5498C81D9C5B83A1C4E03" : "..\/..",
     "8BBBF48E949EACCB58E792853687DBA2BAE6071D" : "ios_colorpicker\/",
     "5F324E888A8A88807622DFD84DC1172544B7A56C" : "..\/rental_app"
   },
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cjko2\/ios_colorpicker",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8BBBF48E949EACCB58E792853687DBA2BAE6071D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kavyanagaraj\/DojoAssignments.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A84C0CA27D44E1596FC5498C81D9C5B83A1C4E03"
     }
   ]
 }
